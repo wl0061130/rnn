@@ -72,7 +72,7 @@ with tf.Session() as sess:
             summary_string_writer.add_summary(summary_string, gs)
 
             if gs % 10 == 0:
-                logging.debug('step [{0}] loss [{1}] total step [{2}]'.format(gs, l, dls.shape[0]))
+                logging.debug('step [{0}] loss [{1}]'.format(gs, l))
                 save_path = saver.save(sess, os.path.join(
                     FLAGS.output_dir, "model.ckpt"), global_step=gs)
     summary_string_writer.close()
