@@ -48,12 +48,12 @@ class Model():
         with tf.variable_scope('embedding'):
             if embedding_file:
                 # if embedding file provided, use it.
-		logging.debug('provide embedding file')
+                logging.debug('provide embedding file')
                 embedding = np.load(embedding_file)
                 embed = tf.constant(embedding, name='embedding')
             else:
                 # if not, initialize an embedding and train it.
-		logging.debug('not provide embedding file')
+                logging.debug('not provide embedding file')
                 embed = tf.get_variable(
                     'embedding', [self.num_words, self.dim_embedding])
                 tf.summary.histogram('embed', embed)
