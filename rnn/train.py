@@ -59,7 +59,8 @@ with tf.Session() as sess:
     for x in range(2):
         logging.debug('epoch [{0}]....'.format(x))
         state = sess.run(model.state_tensor)
-        for dl in utils.get_train_data(vocabulary, batch_size=FLAGS.batch_size, num_steps=FLAGS.num_steps):
+        dls = utils.get_train_data(vocabulary, batch_size=FLAGS.batch_size, num_steps=FLAGS.num_steps)
+        for dl in dls:
             ##################
             # Your Code here
             ##################
@@ -72,7 +73,7 @@ with tf.Session() as sess:
             summary_string_writer.add_summary(summary_string, gs)
 
             if gs % 10 == 0:
-                logging.debug('step [{0}] loss [{1}]'.format(gs, l))
+                logging.debug('step [{0}] loss [{1}] total step [{2}]'.format(gs, l, dls.shape[0]))
                 save_path = saver.save(sess, os.path.join(
                     FLAGS.output_dir, "model.ckpt"), global_step=gs)
     summary_string_writer.close()
